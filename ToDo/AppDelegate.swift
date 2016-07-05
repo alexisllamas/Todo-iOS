@@ -12,10 +12,22 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    func checkIfFirstLaunch() {
+        if NSUserDefaults.standardUserDefaults().boolForKey("hasLaunchedBefore") {
+            print("App has launched before")
+        } else {
+            print("This is the first launched wuuuu")
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "hasLaunchedBefore")
+            NSUserDefaults.standardUserDefaults().setValue(false, forKeyPath: "isAwesome?")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        checkIfFirstLaunch()
         return true
     }
 
